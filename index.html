@@ -9,6 +9,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 
 
     <style>
@@ -25,7 +26,13 @@
 <body class="page-mid-color" style="font-family: 'Times New Roman', Times, serif;">
 
 	 <div class="container-fluid text-center" style="margin-top:2%">
-        <div class="row">
+       <div class="form-group">
+         <label for="usr">Name:</label>
+         <input id="searchField" type="text" class="form-control" id="usr">
+       </div>
+
+
+        <div class="row" id="row">
       		<div class="col-sm-6 col-md-4" style="margin-top:30px">
       			<div>
                 <a class="nav-link top-photo-jon" href="index.html">Divvy</a>
@@ -78,12 +85,73 @@
 
 <script type="text/javascript">
 
-  $.get("backend-files/loadFromDb.php", function(data){
-    // data.forEach(function(result){
-    //
-    // })
-    console.log(data);
+  $(document).ready(function(){
+    $.get("backend-files/loadFromDb.php", function(data){
+      $("#row").append(data);
+    })
   })
+
+  // $(document).on('click','.show_more',function(){
+  //       var ID = $(this).attr('id');
+  //       $('.show_more').hide();
+  //       $('.loding').show();
+  //       $.ajax({
+  //           type:'POST',
+  //           url:'backend-files/ajax_more.php',
+  //           data:'id='+ID,
+  //           success:function(html){
+  //             console.log(html);
+  //               $('#show_more_main'+ID).remove();
+  //               $('#row').append(html);
+  //           }
+  //       });
+  //   });
+
+
+    $("#searchField").keyup(function(){
+      $("#row").empty();
+      if ($("#searchField").val() != ''){
+        $.ajax({
+            type:'POST',
+            url:'backend-files/searchReturn.php',
+            data:'input=' + $("#searchField").val(),
+            success:function(html){
+              $("#row").empty();
+              $('#row').append(html);
+            }
+        });
+      }else {
+        $("#row").empty();
+        $.get("backend-files/loadFromDb.php", function(data){
+          $("#row").append(data);
+        })
+      }
+
+    })
+
+    $(window).on("scroll", function() {
+    	var scrollHeight = $(document).height();
+    	var scrollPosition = $(window).height() + $(window).scrollTop();
+    	if ((scrollHeight - scrollPosition) / scrollHeight === 0 && $(".show_more").attr('id') != null) {
+        console.log($(".show_more").attr('id'));
+        var ID = $(".show_more").attr('id');
+        // $('.show_more').hide();
+        $('.loding').show();
+        $.ajax({
+            type:'POST',
+            url:'backend-files/ajax_more.php',
+            data:'id='+ID,
+            success:function(html){
+              console.log(html);
+                $('#show_more_main'+ID).remove();
+                $('#row').append(html);
+            }
+        });
+    	}
+    });
+
+
+
 
 </script>
 </body>

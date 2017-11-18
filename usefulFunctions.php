@@ -83,3 +83,17 @@
 $content = file_get_contents('https://www.cstatic-images.com/stock/379x253/68/img1113460234-1509471692068.jpg');
 file_put_contents('images/flower.jpg', $content);
  ?>
+
+
+ //////////////////////BULK INSERT
+ // $sql = "INSERT INTO posts(id, url, restaurant_pic, restaurant_name, restaurant_insta, caption, img_start_date, img_end_date)
+ // VALUES";
+ // $tuple = " ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'),";
+
+ // $sql .= sprintf($tuple, $img_id, $img_url, $img_restaurant_pic,
+ //  $img_restaurant_name, $img_restaurant_insta,
+ //   $img_caption, $img_start_date, $img_end_date);
+
+ // $sql = rtrim($sql, ",");
+ // $mysqli->query($sql);
+ ///////////////////////////////////////

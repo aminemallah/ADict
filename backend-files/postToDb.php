@@ -15,20 +15,18 @@ and open the template in the editor.
 
         </script>
         <?php
+            require 'db_info.php';
 
             //for optimizing the captions  //ADD CAPS FREE FOR FREE STUFF OFFERS
             $basicKeywords = array("$", " LL ", " LBP ", " L.L ", " L.B.P ", " L.L. ", " L.B.P. ");
-            $captionKeywords = array(" offer ", "Hurry up ", " call now ", " order now ", " valid on ", " valid for ", " only! ");
+            $captionKeywords = array(" offer ", "Hurry up ", " call now ", " order now ", " valid on ", " valid for ", " only! ",
+              "choose ", " choose ");
 
             $instaAccounts = array("pizzahutlebanon", "mr.international.lb", "lordofthewings_lb", "pizzaninilebanon", "adictlb",
             "dipndiplebanon", "mcdonaldsleb", "bklebanon", "crepaway", "classicbrgr", "ddlebanon", "roadsterdiner",
             "zaatarwzeit", "frank_wurst", "tomatomatic", "deekduke", "kfc_lebanon", "breakfasttobreakfast", "chopsticksleb",
             "subwaylebanon");
             $base_url = 'https://www.instagram.com';
-
-            require 'db_info.php';
-            $sql = "INSERT INTO posts(id, url, restaurant_pic, restaurant_name, restaurant_insta, caption, img_start_date, img_end_date) VALUES";
-            $tuple = " ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'),";
 
             for ($i = 0; $i < count($instaAccounts); $i++){
                 $url = $base_url . '/' . $instaAccounts[$i] . '/?__a=1';
@@ -37,7 +35,7 @@ and open the template in the editor.
 
                 $nodes = $characters->user->media->nodes;
                 //get the 1 last posts of each instagram account
-                for ($j = 0; $j < 1; $j++){
+                for ($j = 0; $j < 3; $j++){
                     $caption = $nodes[$j]->caption;
                     if (isOffer($caption, $captionKeywords, $basicKeywords) == true){
                         $img_caption = hashtagRemover($caption);
@@ -49,20 +47,24 @@ and open the template in the editor.
                         $img_start_date = $nodes[$j]->date;
                         $img_end_date = $nodes[$j]->date + 604800;
 
-                        $sql .= sprintf($tuple, $img_id, $img_url, $img_restaurant_pic,
-                         $img_restaurant_name, $img_restaurant_insta,
-                          $img_caption, $img_start_date, $img_end_date);
+                        // echo "<img src='$img_url' />";
+
+                        $sql = "INSERT INTO posts(id, url, restaurant_pic, restaurant_name, restaurant_insta, caption, img_start_date, img_end_date)
+                        VALUES('$img_id', '$img_url', '$img_restaurant_pic',
+                         '$img_restaurant_name', '$img_restaurant_insta',
+                          '$img_caption', '$img_start_date', '$img_end_date')";
+                          $mysqli->query($sql);
                     }
                 }
             }
-            $sql = rtrim($sql, ",");
-            $mysqli->query($sql);
 
             //delete after 1 week
-            //dont add with duplicat urls or ids
             //img processing
 
             function isOffer($string, $captionKeywords, $basicKeywords){
+
+              if (stripos($string, " voucher") !== false)
+                      return false;
 
                 for ($i = 0; $i < count($basicKeywords); $i++){
                   if (strpos($string, $basicKeywords[$i]) !== false)
@@ -87,7 +89,16 @@ and open the template in the editor.
                 if (preg_match("/[0-9]L.B.P./", $string))
                         return true;
 
-                if (strpos($string, " FREE ") !== false && stripos($string, " get ") !== false)
+                if (strpos($string, " FREE ") !== false)
+                        return true;
+
+                if (stripos($string, " FREE ") !== false && stripos($string, " get ") !== false)
+                        return true;
+
+                if (stripos($string, " FREE ") !== false && stripos($string, " from ") !== false)
+                        return true;
+
+                if (stripos($string, " FREE ") !== false && stripos($string, " till ") !== false)
                         return true;
 
                 //case Insensitive Here
@@ -109,6 +120,7 @@ and open the template in the editor.
                   $i--;
                 }
                 $cleanString = implode(" ", array_slice($stringArray, 0 , $i + 1));
+                $cleanString = addslashes($cleanString);
                 return str_replace("#", "", $cleanString);
             }
         ?>
