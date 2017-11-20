@@ -18,9 +18,8 @@ and open the template in the editor.
             require 'db_info.php';
 
             //for optimizing the captions  //ADD CAPS FREE FOR FREE STUFF OFFERS
-            $basicKeywords = array("$", " LL ", " LBP ", " L.L ", " L.B.P ", " L.L. ", " L.B.P. ");
-            $captionKeywords = array(" offer ", "Hurry up ", " call now ", " order now ", " valid on ", " valid for ", " only! ",
-              "choose ", " choose ");
+            $basicKeywords = array("$", " LL ", " LBP ", " L.L ", " L.B.P ", " L.L. ", " L.B.P. ", "+");
+            $captionKeywords = array(" offer ", "Hurry up ", " call now ", " valid on ", " valid for ", " only! ");
 
             $instaAccounts = array("pizzahutlebanon", "mr.international.lb", "lordofthewings_lb", "pizzaninilebanon", "adictlb",
             "dipndiplebanon", "mcdonaldsleb", "bklebanon", "crepaway", "classicbrgr", "ddlebanon", "roadsterdiner",
@@ -28,35 +27,41 @@ and open the template in the editor.
             "subwaylebanon");
             $base_url = 'https://www.instagram.com';
 
-            for ($i = 0; $i < count($instaAccounts); $i++){
-                $url = $base_url . '/' . $instaAccounts[$i] . '/?__a=1';
-                $data = file_get_contents($url);
-                $characters = json_decode($data);
+            $myfile = fopen("restaurants.txt", "r") or die("Unable to open file!");
+            while(!feof($myfile)) {
+              echo fgets($myfile) . "<br>";
+              $instname = trim(fgets($myfile));
+              $url = $base_url . '/' . $instname . '/?__a=1';
+              $data = file_get_contents($url);
+              $characters = json_decode($data);
 
-                $nodes = $characters->user->media->nodes;
-                //get the 1 last posts of each instagram account
-                for ($j = 0; $j < 3; $j++){
-                    $caption = $nodes[$j]->caption;
-                    if (isOffer($caption, $captionKeywords, $basicKeywords) == true){
-                        $img_caption = hashtagRemover($caption);
-                        $img_id = $nodes[$j]->id;
-                        $img_url = $nodes[$j]->display_src;
-                        $img_restaurant_pic = $characters->user->profile_pic_url;
-                        $img_restaurant_name = $characters->user->full_name;
-                        $img_restaurant_insta = $characters->user->username;
-                        $img_start_date = $nodes[$j]->date;
-                        $img_end_date = $nodes[$j]->date + 604800;
+              $nodes = $characters->user->media->nodes;
+              //get the 1 last posts of each instagram account
+              for ($j = 0; $j < 3; $j++){
+                  $caption = $nodes[$j]->caption;
+                  if (isOffer($caption, $captionKeywords, $basicKeywords) == true){
+                      $img_caption = hashtagRemover($caption);
+                      $img_id = $nodes[$j]->id;
+                      $img_url = $nodes[$j]->display_src;
+                      $img_restaurant_pic = $characters->user->profile_pic_url;
+                      $img_restaurant_name = $characters->user->full_name;
+                      $img_restaurant_insta = $characters->user->username;
+                      $img_start_date = $nodes[$j]->date;
+                      $img_end_date = $nodes[$j]->date + 604800;
 
-                        // echo "<img src='$img_url' />";
+                      echo $img_id . "<br>";
 
-                        $sql = "INSERT INTO posts(id, url, restaurant_pic, restaurant_name, restaurant_insta, caption, img_start_date, img_end_date)
-                        VALUES('$img_id', '$img_url', '$img_restaurant_pic',
-                         '$img_restaurant_name', '$img_restaurant_insta',
-                          '$img_caption', '$img_start_date', '$img_end_date')";
-                          $mysqli->query($sql);
-                    }
-                }
+                      // echo "<img src='$img_url' />";
+
+                      $sql = "INSERT INTO posts(id, url, restaurant_pic, restaurant_name, restaurant_insta, caption, img_start_date, img_end_date)
+                      VALUES('$img_id', '$img_url', '$img_restaurant_pic',
+                       '$img_restaurant_name', '$img_restaurant_insta',
+                        '$img_caption', '$img_start_date', '$img_end_date')";
+                        $mysqli->query($sql);
+                  }
+              }
             }
+            fclose($myfile);
 
             //delete after 1 week
             //img processing

@@ -1,159 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <title>ADict</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <head>
 
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap Search Template</title>
 
-    <style>
-        /* Make the image fully responsive */
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,500,500i">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/style.css">
 
-        .carousel-inner img {
-            width: 100%;
-            height: 100%!important;
-        }
-    </style>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-</head>
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="assets/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 
-<body class="page-mid-color" style="font-family: 'Times New Roman', Times, serif;">
+        <style>
+            /* Make the image fully responsive */
 
-	 <div class="container-fluid text-center" style="margin-top:2%">
-       <div class="form-group">
-         <label for="usr">Name:</label>
-         <input id="searchField" type="text" class="form-control" id="usr">
-       </div>
+            .carousel-inner img {
+                width: 100%;
+                height: 100%!important;
+            }
 
+            .grey {
+              background-color: #F3F3F3;
+            }
 
-        <div class="row" id="row">
-      		<div class="col-sm-6 col-md-4" style="margin-top:30px">
-      			<div>
-                <a class="nav-link top-photo-jon" href="index.html">Divvy</a>
-                <img src="images/Divvy.jpg" class="img-thumbnail" >
-      			</div>
-          </div>
+            .red {
+              background-color: #CB202D;
+            }
 
-          <div class="col-sm-6 col-md-4" style="margin-top:30px;">
-              <div>
-      				        <a class="nav-link top-photo-jon" href="index.html" style="color: #808080">Deek Duke</a>
-                      <img src="images/DeekDuke.jpg" class="img-thumbnail" >
-      				</div>
-          </div>
-      			  <div class="col-sm-6 col-md-4" style="margin-top:30px;">
-        				<div >
-        			       <a class="nav-link top-photo-jon" href="index.html">Divvy</a>
-                     <img src="images/Divvy.jpg" class="img-thumbnail">
-        				</div>
-              </div>
+            .red-border {
+              border: 2px solid #CB202D;
+            }
 
-          <div class="col-sm-6 col-md-4" style="margin-top:30px">
-            <div>
-                <a class="nav-link top-photo-jon" href="index.html">Divvy</a>
-                <img src="images/Divvy.jpg" class="img-thumbnail" >
-            </div>
-          </div>
+            .white {
+              color: white;
+            }
 
-          <div class="col-sm-6 col-md-4" style="margin-top:30px;">
-              <div>
-                      <a class="nav-link top-photo-jon" href="index.html" style="color: #808080">Deek Duke</a>
-                      <img src="images/DeekDuke.jpg" class="img-thumbnail" >
-              </div>
-          </div>
-              <div class="col-sm-6 col-md-4" style="margin-top:30px;">
-                <div >
-                     <a class="nav-link top-photo-jon" href="index.html">Divvy</a>
-                     <img src="images/Divvy.jpg" class="img-thumbnail">
+            .tinypic {
+              border-radius: 100%;
+              margin: 15px;
+            }
+
+            .darkgrey {
+              background-color: #282C35;
+            }
+
+        </style>
+
+    </head>
+
+    <body class="grey">
+
+		<!-- Top menu -->
+		<nav class="navbar navbar-inverse red" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html">Bootstrap Search Template</a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="top-navbar-1">
+					<form class="navbar-form navbar-right navbar-search-form disabled wow fadeInLeft" role="form" action="" method="post">
+						<div class="form-group">
+							<input type="text" name="search" placeholder="Search..." class="search form-control">
+						</div>
+					</form>
+					<ul class="nav navbar-nav navbar-right navbar-menu-items wow fadeIn">
+						<li><a href="#" style="color:white;">The Team</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+        <!-- Top content -->
+        <div class="top-content">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-sm-12 text wow fadeInLeft">
+                        <h1><strong>No Pepper</strong> Search</h1>
+                        <h3 class="white">Offers For The Hungry People</h3>
+                    </div>
+                    <div class="col-md-6 col-md-offset-3">
+                        <input id="searchField" placeholder="Search" type="text" class="form-control red-border" id="usr">
+                    </div>
                 </div>
-              </div>
 
+            </div>
         </div>
-		</div>
+
+        <div class="container-fluid text-center"  style="margin-top:2%">
+             <div class="row" id="row">
+             </div>
+     		</div>
+
+         <div class='bg-dark' style="margin-top:10px; margin-bottom:50px">
+         </div>
+
+         <footer class="footer darkgrey">
+            <div class="container">
+              <span class="text-muted">All trademarks are properties of their respective owners. © 2017-2018 - NoPeppers™ Media Pvt Ltd. All rights reserved.</span>
+              <br>
+              <span class="text-muted">Amine Mallah</span>
+            </div>
+          </footer>
 
 
+        <!-- Javascript -->
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
 
 
-    <div class='bg-dark' style="margin-top:10px; margin-bottom:50px">
-    </div>
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
 
+        <script type="text/javascript">
 
-<script type="text/javascript">
+          $(document).ready(function(){
+            $.get("backend-files/loadFromDb.php", function(data){
+              $("#row").append(data);
+            })
+          })
 
-  $(document).ready(function(){
-    $.get("backend-files/loadFromDb.php", function(data){
-      $("#row").append(data);
-    })
-  })
-
-  // $(document).on('click','.show_more',function(){
-  //       var ID = $(this).attr('id');
-  //       $('.show_more').hide();
-  //       $('.loding').show();
-  //       $.ajax({
-  //           type:'POST',
-  //           url:'backend-files/ajax_more.php',
-  //           data:'id='+ID,
-  //           success:function(html){
-  //             console.log(html);
-  //               $('#show_more_main'+ID).remove();
-  //               $('#row').append(html);
-  //           }
-  //       });
-  //   });
-
-
-    $("#searchField").keyup(function(){
-      $("#row").empty();
-      if ($("#searchField").val() != ''){
-        $.ajax({
-            type:'POST',
-            url:'backend-files/searchReturn.php',
-            data:'input=' + $("#searchField").val(),
-            success:function(html){
+            $("#searchField").keyup(function(){
+              console.log($("#searchField").val());
               $("#row").empty();
-              $('#row').append(html);
-            }
-        });
-      }else {
-        $("#row").empty();
-        $.get("backend-files/loadFromDb.php", function(data){
-          $("#row").append(data);
-        })
-      }
+              if ($("#searchField").val() != ''){
+                $.ajax({
+                    type:'POST',
+                    url:'backend-files/searchReturn.php',
+                    data:'input=' + $("#searchField").val(),
+                    success:function(html){
+                      $("#row").empty();
+                      $('#row').append(html);
+                    }
+                });
+              }else {
+                $("#row").empty();
+                $.get("backend-files/loadFromDb.php", function(data){
+                  $("#row").append(data);
+                })
+              }
 
-    })
+            })
 
-    $(window).on("scroll", function() {
-    	var scrollHeight = $(document).height();
-    	var scrollPosition = $(window).height() + $(window).scrollTop();
-    	if ((scrollHeight - scrollPosition) / scrollHeight === 0 && $(".show_more").attr('id') != null) {
-        console.log($(".show_more").attr('id'));
-        var ID = $(".show_more").attr('id');
-        // $('.show_more').hide();
-        $('.loding').show();
-        $.ajax({
-            type:'POST',
-            url:'backend-files/ajax_more.php',
-            data:'id='+ID,
-            success:function(html){
-              console.log(html);
-                $('#show_more_main'+ID).remove();
-                $('#row').append(html);
-            }
-        });
-    	}
-    });
+            $(window).on("scroll", function() {
+            	var scrollHeight = $(document).height();
+            	var scrollPosition = $(window).height() + $(window).scrollTop();
+              console.log($(document).height());
+            	if ((scrollHeight - scrollPosition) / scrollHeight === 0 && $(".show_more").attr('id') != null) {
+                console.log($(".show_more").attr('id'));
+                var ID = $(".show_more").attr('id');
+                // $('.show_more').hide();
+                $('.loding').show();
+                $.ajax({
+                    type:'POST',
+                    url:'backend-files/ajax_more.php',
+                    data:'id='+ID,
+                    success:function(html){
+                      console.log(html);
+                        $('#show_more_main'+ID).remove();
+                        $('#row').append(html);
+                        $('.loding').remove();
+                    }
+                });
+            	}
+            });
 
+            function posY(e){
+                  e.preventDefault()
+              }
+        </script>
 
-
-
-</script>
-</body>
+    </body>
 
 </html>

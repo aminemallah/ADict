@@ -24,10 +24,14 @@ if (isset($_POST["id"]) && !empty($_POST["id"])){
       $id = $row2['id'];
       ?>
 
-      <div class="col-sm-6 col-md-4" style="margin-top:30px;">
+      <div class="col-sm-6 col-md-4 col-md-offset-4" style="margin-top:30px;">
           <div>
-                  <a class="nav-link top-photo-jon" href="index.html" style="color: #808080"><?= $row2['restaurant_name'] ?></a>
-                  <img src="<?= $row2['url'] ?>" class="img-thumbnail" >
+                  <div style="float:left;">
+                    <img class="tinypic" height="30px" width="30px" src="<?= $row2['restaurant_pic'] ?>" alt="<?= $row2['restaurant_name'] ?>">
+                    <a onclick="posY(event)" class="nav-link top-photo-jon" href="#" style="color: #CB202D;"><?= $row2['restaurant_name'] ?></a>
+                  </div>
+                  <img src="<?= $row2['url'] ?>" class="img-thumbnail red" >
+                  <p style="color: #CB202D;font-weight: 400;margin-top:15px;"><?= $row2['caption'] ?></p>
           </div>
       </div>
 
@@ -39,7 +43,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])){
          <div class="show_more_main" id="show_more_main<?php echo $id; ?>">
 
            <button style="display: none;" id="<?php echo $id; ?>" type="button" title="Load more posts" class="btn btn-default show_more">Show More</button>
-           <button type="button" class="btn btn-default loding" style="display: none;"><span class="loding_txt">Loading....</span></button>
+           <button type="button" class="btn btn-default loding " style="display: none;"><span class="loding_txt">Loading....</span></button>
 
          </div>
        </div>

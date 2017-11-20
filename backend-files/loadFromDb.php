@@ -14,10 +14,14 @@ if ($rowCount > 0){
 
 ?>
 
-<div class="col-sm-6 col-md-4" style="margin-top:30px;">
+<div class="col-sm-6 col-md-4 col-md-offset-4" style="margin-top:30px;">
     <div>
-            <a class="nav-link top-photo-jon" href="index.html" style="color: #808080"><?= $row['restaurant_name'] ?></a>
-            <img src="<?= $row['url'] ?>" class="img-thumbnail" >
+            <div style="float:left;">
+              <img class="tinypic" height="30px" width="30px" src="<?= $row['restaurant_pic'] ?>" alt="<?= $row['restaurant_name'] ?>">
+              <a onclick="posY(event)" class="nav-link top-photo-jon" href="#" style="color: #CB202D;"><?= $row['restaurant_name'] ?></a>
+            </div>
+            <img src="<?= $row['url'] ?>" class="img-thumbnail red" >
+            <p style="color: #CB202D;font-weight: 400;margin-top:15px;"><?= $row['caption'] ?></p>
     </div>
 </div>
 
@@ -29,6 +33,8 @@ if ($rowCount > 0){
     <button style="display: none;" id="<?php echo $id; ?>" type="button" title="Load more posts" class="btn btn-default show_more">Show More</button>
     <button type="button" class="btn btn-default loding" style="display: none;"><span class="loding_txt">Loading....</span></button>
   </div>
+
+
 
 
 

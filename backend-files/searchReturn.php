@@ -16,10 +16,14 @@
 
             ?>
 
-            <div class="col-sm-6 col-md-4" style="margin-top:30px;">
+            <div class="col-sm-6 col-md-4 col-md-offset-4" style="margin-top:30px;">
                 <div>
-                        <a class="nav-link top-photo-jon" href="index.html" style="color: #808080"><?= $rest_name ?></a>
-                        <img src="<?= $rest_url ?>" class="img-thumbnail" >
+                        <div style="float:left;">
+                          <img class="tinypic" height="30px" width="30px" src="<?= $rest_pic ?>" alt="<?= $rest_name ?>">
+                          <a onclick="posY(event)" class="nav-link top-photo-jon" href="" style="color: #CB202D;"><?= $rest_name ?></a>
+                        </div>
+                        <img src="<?= $rest_url ?>" class="img-thumbnail red" >
+                        <p style="color: #CB202D;font-weight: 400;margin-top:15px;"><?= $rest_caption ?></p>
                 </div>
             </div>
 
